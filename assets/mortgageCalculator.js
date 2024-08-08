@@ -28,12 +28,23 @@ function calculateMortgage() {
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate, type);
         const totalText = $('#totalResultsValue')
         let totalPayment = monthlyPayment * termMonths;
-        paymentText.text(monthlyPayment.toFixed(2));
-        totalText.text(totalPayment.toFixed(2));
+        updateNumber('#monthlyResultsValue', monthlyPayment.toFixed(2));
+        updateNumber('#totalResultsValue', totalPayment.toFixed(2));
         emptyResults.css('opacity', '0');
         completedResults.css('opacity', '1');
         
     }
+}
+
+function updateNumber(element, number) {
+    $(element).prop('counter', 0).animate({
+        counter: number
+    }, {
+        duration: 500,
+        step: function(now) {
+            $(this).text(now.toFixed(2));
+        }
+    });
 }
 
 function calculateMonthlyPayment(totalAmount, termLength, interestRate, type) {
