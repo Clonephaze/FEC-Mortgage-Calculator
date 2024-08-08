@@ -23,8 +23,12 @@ function calculateMortgage() {
     if (!isValid) {
         return;
     } else {
+        const paymentText = $('#monthlyResultsValue');
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate, type);
-        console.log(`Monthly Payment: ${monthlyPayment.toFixed(2)}`);
+        paymentText.text(monthlyPayment);
+        emptyResults.css('opacity', '0');
+        completedResults.css('opacity', '1');
+        
     }
 }
 
