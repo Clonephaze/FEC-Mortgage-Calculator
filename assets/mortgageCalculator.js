@@ -15,6 +15,7 @@ const typeError = $('#typeError');
 function calculateMortgage() {
     const totalAmount = Number(mortgageAmount.val());
     const termLength = Number(mortgageTerm.val());
+    const termMonths = termLength * 12
     const interestRate = Number(mortgageRate.val());
     const type = typeRepayment.is(':checked') ? 'repayment' : 'interest';
     const isValid = checkInputs(totalAmount, termLength, interestRate, type);
@@ -25,7 +26,10 @@ function calculateMortgage() {
     } else {
         const paymentText = $('#monthlyResultsValue');
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate, type);
-        paymentText.text(monthlyPayment);
+        const totalText = $('#totalResultsValue')
+        let totalPayment = (monthlyPayment * termMonths) + totalAmount;
+        paymentText.text(monthlyPayment.toFixed(2));
+        totalText.text(totalPayment.toFixed(2));
         emptyResults.css('opacity', '0');
         completedResults.css('opacity', '1');
         
