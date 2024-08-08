@@ -20,15 +20,24 @@ function calculateMortgage() {
     const isValid = checkInputs(totalAmount, termLength, interestRate, type);
 
 
-    if (!isValid) { 
+    if (!isValid) {
         return;
     } else {
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate, type);
+        console.log(`Monthly Payment: ${monthlyPayment.toFixed(2)}`);
     }
 }
 
 function calculateMonthlyPayment(totalAmount, termLength, interestRate, type) {
-    const monthlyRate = totalAmount * ((interestRate *(1 + interestRate) ** ))
+    if (type === 'repayment') {
+        // Use the formula for repayment mortgage
+        return totalAmount * interestRate * (Math.pow(1 + interestRate, termLength)) / (Math.pow(1 + interestRate, termLength) - 1);
+    } else if (type === 'interest') {
+        // For an interest-only mortgage, just multiply the principal by the monthly interest rate
+        return totalAmount * interestRate;
+    } else {
+        return 0; // If type is not recognized
+    }
 }
 
 function checkInputs(totalAmount, termLength, interestRate, type) {
