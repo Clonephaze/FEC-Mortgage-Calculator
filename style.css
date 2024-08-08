@@ -310,16 +310,23 @@ body {
     border-radius: 5px;
     background-color: hsla(201, 56%, 12%);
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
     gap: 0.5rem;
     position: relative;;
     border-top: 3px solid var(--Lime);
+    display: grid;
+    grid-template-areas: "content";
 
     >hr {
        border: unset;
        border-top: 1px solid var(--Slate-700);
     }
+}
+
+#repaymentWrapper,
+#interestWrapper{
+    grid-area: "content";
+    display: flex;
+    flex-direction: column;
 }
 
 .monthly-results {
@@ -356,6 +363,10 @@ body {
     }
 }
 
+#interestWrapper {
+    grid
+    opacity: 0;
+}
 
 /****** Hover States ******/
 /** Doing hover: hover ensures the rules only apply on devices that support hover states, other devices won't even load the rules **/
