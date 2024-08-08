@@ -34,7 +34,7 @@ function calculateMortgage() {
         completedResults.css('opacity', '1');
     } else if (type === 'interest') {
         const interestRatePercent = interestRate / 100
-       let totalInterest = interestRate * totalAmount
+       let totalInterest = interestRatePercent * totalAmount
         updateNumber('#monthlyResultsValue', totalInterest.toFixed(2));
         updateNumber('#totalResultsValue', 0);
     } else {
