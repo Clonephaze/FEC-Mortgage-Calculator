@@ -1,0 +1,385 @@
+/****** Global Rules ******/
+:root {
+    --Red: hsl(4, 69%, 50%);
+    --Lime: hsl(61, 70%, 52%);
+    --White: hsl(0, 0%, 100%);
+    --bg-color: hsl(199, 81%, 94%);
+    --Slate-100: hsl(202, 86%, 94%);
+    --Slate-300: hsl(203, 41%, 72%);
+    --Slate-500: hsl(200, 26%, 54%);
+    --Slate-700: hsl(200, 24%, 40%);
+    --Slate-900: hsl(202, 55%, 16%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;   
+}
+
+h1, h2, h3 {
+    font-size: unset;
+    font-weight: unset;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+}
+
+/****** Main Calc Container Grid ******/
+.calc-container {
+    display: grid;
+    grid-template-areas: "inputs results";
+    grid-template-columns: 1fr 1fr;
+    max-width: min(1280px, 80vw);
+    border-radius: 20px;
+    overflow: clip;
+    background-color: var(--White);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+
+    @media (max-width: 600px) {
+        grid-template-areas: "inputs" "results";
+        grid-template-columns: 1fr;
+        max-width: 100vw;
+        border-radius: 0px;
+    }
+}
+
+/****** Input Section ******/
+.user-input-section {
+    grid-area: inputs;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & .term-rate-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        >div {
+            width: 45%;
+        }
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+            gap: 1rem;
+
+            >div {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.title-wrapper {
+    display: flex;
+
+    >.calc-title {
+        font-size: clamp(1.125rem, 1.0417rem + 0.3704vw, 1.5rem);
+        font-weight: 700;
+    }
+
+    >.clear-button {
+        border: unset;
+        background-color: unset;
+        margin-left: auto;
+        cursor: pointer;
+        text-decoration: underline;
+        color: var(--Slate-700);
+    }
+}
+
+.inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & .input-title {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--Slate-900);
+        margin-bottom: 0.5rem;
+    }
+
+    & input[type="text"] {
+        background-color: var(--White);
+        border: unset;
+        background: unset;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+
+        &:focus {
+            outline: unset;
+        }
+    }
+
+    & .amount-bar, .term-bar, .rate-bar {
+        height: 2.5rem;
+        width: 100%;
+        border: 1px solid var(--Slate-500);
+        border-radius: 5px;
+        display: flex;
+        overflow: clip;
+
+        &:has(input:user-invalid) {
+            border: 1px solid var(--Red);
+
+            & .symbol {
+                background-color: var(--Red);
+                color: var(--White);
+            }
+        }
+
+        & .symbol {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            height: 100%;
+            background-color: var(--Slate-300);
+            color: var(--Slate-900);
+        }
+    }
+
+    & .type-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    & .error-message {
+        font-size: 0.75rem;
+        color: var(--Red);
+        font-style: italic;
+        padding-top: 0.3rem;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.25s ease;
+    }
+}
+
+.radio-input {
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-weight: 700;
+
+    & input[type="radio"] {
+        appearance: none;
+
+        &:focus {
+            outline: unset;
+        }
+    }
+
+    & label {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--Slate-500);
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+
+        &::before {
+            content: "";
+            display: inline-block;
+            height: 1em;
+            width: 1em;
+            border: 1px solid var(--Slate-700);
+            border-radius: 50%;
+            margin-inline: 0.8rem;
+        }
+    }
+    & input[type="radio"]:checked + label {
+        background-color: hsla(61, 70%, 52%, 0.25);
+        border: 1px solid var(--Lime);
+
+        &::before {
+            background: radial-gradient(0.6em circle at center, var(--Lime) 50%, transparent 55%);
+            border: 1px solid var(--Lime);
+        }
+    }
+}
+
+.calculate-button {
+    width: max(80%, 220px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--Lime);
+    border: none;
+    border-radius: 50vw;
+    font-weight: 700;
+    font-size: clamp(1rem, 0.9722rem + 0.1235vw, 1.125rem);
+    padding: 0.8rem;
+    cursor: pointer;
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}
+
+/****** Results Section ******/
+.results-section {
+    grid-area: results;
+    background-color: var(--Slate-900);
+    border-radius: 0 0 0 60px;
+    color: var(--White);
+    display: grid;
+    grid-template-areas: "content";
+    @media (max-width: 600px) {
+        border-radius: 0;
+    }
+}
+
+.empty-results-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    grid-area: content;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+
+    >.empty-results-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    >.empty-results-text {
+        font-size: 0.9rem;
+        color: var(--Slate-500);
+    }
+}
+
+.completed-results-wrapper {
+    grid-area: content;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.results-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.results-text {
+    font-size: 0.8rem;
+    color: var(--Slate-300);
+}
+
+.calculated-results-wrapper {
+    border-radius: 5px;
+    background-color: hsla(201, 56%, 12%);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;;
+    border-top: 3px solid var(--Lime);
+
+    >hr {
+       border: unset;
+       border-top: 1px solid var(--Slate-700);
+    }
+}
+
+.monthly-results {
+    >h3 {
+        font-size: 0.8rem;
+        color: var(--Slate-300);
+    }
+    >p {
+        font-size: clamp(1.75rem, 1.5833rem + 0.7407vw, 2.5rem);
+        font-weight: 700;
+        color: var(--Lime);
+        margin-block: 0.5rem;
+
+        >span {
+            margin-inline-start: 0.25rem;
+        }
+    }
+}
+
+.total-results {
+    >h3 {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        color: var(--Slate-300);
+    }
+    >p {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-block: 0.5rem;
+
+        >span {
+            margin-inline-start: 0.25rem;
+        }
+    }
+}
+
+/****** Hover States ******/
+/** Doing hover: hover ensures the rules only apply on devices that support hover states, other devices won't even load the rules **/
+@media (hover: hover) {
+    .radio-input>label:hover {
+        border-color: var(--Lime);
+    }
+
+    .amount-bar, .term-bar, .rate-bar {
+        &:hover {
+            border-color: var(--Slate-700);
+        }
+    }
+
+    .clear-button:hover {
+        color: var(--Slate-900);
+    }
+
+    .calculate-button {
+        transition: background-color 0.25s ease;
+
+        &:hover {
+            background-color: hsla(61, 70%, 52%, 0.5);
+        }
+    }
+}
+
+/****** Fonts ******/
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url(assets/fonts/PlusJakartaSans-VariableFont_wght.ttf);
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url(assets/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf);
+    font-style: italic;
+}
+
+
+/****** FEC Attribution Rules ******/
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
