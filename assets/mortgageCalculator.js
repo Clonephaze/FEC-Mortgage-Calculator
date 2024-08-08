@@ -19,20 +19,25 @@ function calculateMortgage() {
     const interestRate = Number(mortgageRate.val());
     const type = typeRepayment.is(':checked') ? 'repayment' : 'interest';
     const isValid = checkInputs(totalAmount, termLength, interestRate, type);
+    const paymentText = $('#monthlyResultsValue');
+    const totalText = $('#totalResultsValue')
 
 
     if (!isValid) {
         return;
-    } else {
-        const paymentText = $('#monthlyResultsValue');
-        let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate, type);
-        const totalText = $('#totalResultsValue')
+    } else if (type === 'repayment') {
+        let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate);
         let totalPayment = monthlyPayment * termMonths;
         updateNumber('#monthlyResultsValue', monthlyPayment.toFixed(2));
         updateNumber('#totalResultsValue', totalPayment.toFixed(2));
         emptyResults.css('opacity', '0');
         completedResults.css('opacity', '1');
-        
+    } else if (type === 'interest') {
+       let totalInterest = interestRate * totalAmount
+        updateNumber('#monthlyResultsValue', totalInterest.toFixed(2));
+        updateNumber('#totalResultsValue', 0);
+    } else {
+        console.log('Error');
     }
 }
 
@@ -47,18 +52,10 @@ function updateNumber(element, number) {
     });
 }
 
-function calculateMonthlyPayment(totalAmount, termLength, interestRate, type) {
+function calculateMonthlyPayment(totalAmount, termLength, interestRate) {
     const monthlyInterest = interestRate / 100 / 12
     const termMonths = termLength * 12
-    if (type === 'repayment') {
-        // Use the formula for repayment mortgage
-        return totalAmount * monthlyInterest * (Math.pow(1 + monthlyInterest, termMonths)) / (Math.pow(1 + monthlyInterest, termMonths) - 1);
-    } else if (type === 'interest') {
-        // For an interest-only mortgage, just multiply the principal by the monthly interest rate
-        return totalAmount * interestRate;
-    } else {
-        return 0; // If type is not recognized
-    }
+    return totalAmount * monthlyInterest * (Math.pow(1 + monthlyInterest, termMonths)) / (Math.pow(1 + monthlyInterest, termMonths) - 1);
 }
 
 function checkInputs(totalAmount, termLength, interestRate, type) {
