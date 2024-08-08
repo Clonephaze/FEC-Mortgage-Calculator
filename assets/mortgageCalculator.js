@@ -27,7 +27,7 @@ function calculateMortgage() {
         const paymentText = $('#monthlyResultsValue');
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate, type);
         const totalText = $('#totalResultsValue')
-        let totalPayment = (monthlyPayment * termMonths) + totalAmount;
+        let totalPayment = monthlyPayment * termMonths;
         paymentText.text(monthlyPayment.toFixed(2));
         totalText.text(totalPayment.toFixed(2));
         emptyResults.css('opacity', '0');
