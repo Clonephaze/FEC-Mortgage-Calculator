@@ -324,9 +324,18 @@ body {
 
 #repaymentWrapper,
 #interestWrapper{
-    grid-area: "content";
+    grid-area: content;
     display: flex;
     flex-direction: column;
+    transition: opacity 200ms ease-in-out;
+}
+
+#repaymentWrapper {
+    opacity: 1;
+}
+
+#interestWrapper {
+    opacity: 0;
 }
 
 .monthly-results {
@@ -361,11 +370,6 @@ body {
             margin-inline-start: 0.25rem;
         }
     }
-}
-
-#interestWrapper {
-    grid
-    opacity: 0;
 }
 
 /****** Hover States ******/
