@@ -29,9 +29,11 @@ function calculateMortgage() {
 }
 
 function calculateMonthlyPayment(totalAmount, termLength, interestRate, type) {
+    const monthlyInterest = interestRate / 100 / 12
+    const termMonths = termLength * 12
     if (type === 'repayment') {
         // Use the formula for repayment mortgage
-        return totalAmount * interestRate * (Math.pow(1 + interestRate, termLength)) / (Math.pow(1 + interestRate, termLength) - 1);
+        return totalAmount * monthlyInterest * (Math.pow(1 + monthlyInterest, termMonths)) / (Math.pow(1 + monthlyInterest, termMonths) - 1);
     } else if (type === 'interest') {
         // For an interest-only mortgage, just multiply the principal by the monthly interest rate
         return totalAmount * interestRate;
