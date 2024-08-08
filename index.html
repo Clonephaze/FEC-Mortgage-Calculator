@@ -16,7 +16,7 @@
 			<div class="user-input-section">
 				<div class="title-wrapper">
 					<h1 class="calc-title">Mortgage Calculator</h1>
-					<button class="clear-button">Clear All</button>
+					<button id="clearButton" class="clear-button">Clear All</button>
 				</div>
 				<form autocomplete="off" class="inputs-wrapper">
 					<div class="amount-wrapper">
@@ -59,18 +59,20 @@
 					</div>
 				</form>
 				<button id="calculateButton" type="submit" class="calculate-button">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#133041" d="M18.75 2.25H5.25a1.5 1.5 0 0 0-1.5 1.5v16.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V3.75a1.5 1.5 0 0 0-1.5-1.5Zm-10.5 16.5a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 18.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 15a1.125 1.125 0 1 1 0-2.25A1.125 1.125 0 0 1 12 15Zm3.75 3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm1.5-5.25a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1-.75-.75V6a.75.75 0 0 1 .75-.75h9a.75.75 0 0 1 .75.75v3.75Z"/>
-					</svg>
-					Calculate Repayments
+					<p>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M18.75 2.25H5.25a1.5 1.5 0 0 0-1.5 1.5v16.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V3.75a1.5 1.5 0 0 0-1.5-1.5Zm-10.5 16.5a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 18.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 15a1.125 1.125 0 1 1 0-2.25A1.125 1.125 0 0 1 12 15Zm3.75 3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm1.5-5.25a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1-.75-.75V6a.75.75 0 0 1 .75-.75h9a.75.75 0 0 1 .75.75v3.75Z"/>
+						</svg>
+						Calculate Repayments
+					</p>
 				</button>
 			</div>
 			<div class="results-section">
-				<div class="empty-results-wrapper">
+				<div id="emptyResults" class="empty-results-wrapper">
 					<img src="assets/images/illustration-empty.svg" alt="">
 					<h2 class="empty-results-title">Results shown here</h2>
 					<p class="empty-results-text">Complete the form and click "Calculate Repayments" to see what your monthly repayments would be.</p>
 				</div>
-				<div class="completed-results-wrapper">
+				<div id="completedResults" class="completed-results-wrapper">
 					<h2 class="results-title">Your results</h2>
 					<p class="results-text">Your results are shown below based on the information you provided. To adjust the results, edit the form and click "calculate repayments" again.</p>
 					<div class="calculated-results-wrapper">
