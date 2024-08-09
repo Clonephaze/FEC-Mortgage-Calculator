@@ -23,6 +23,7 @@
 						<div class="amount-bar">
 							<div class="symbol before">$</div>
 							<input id="amountInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,2})?$">
+							<label hidden for="amountInput">input</label>
 						</div>
 						<div class="error-message" id="amountError">This field is required</div>
 					</div>
@@ -31,6 +32,7 @@
 							<h2 class="input-title">Mortgage Term</h2>
 							<div class="term-bar">
 								<input id="termInput" type="text" inputmode="numeric" required pattern="[0-9]+">
+								<label hidden for="termInput">term input</label>
 								<div class="symbol after">Years</div>
 							</div>
 							<div class="error-message" id="termError">This field is required</div>
@@ -39,6 +41,7 @@
 							<h2 class="input-title">Interest Rate</h2>
 							<div class="rate-bar">
 								<input id="rateInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,})?$">
+								<label hidden for="rateInput">input</label>
 								<div class="symbol after">%</div>
 							</div>
 							<div class="error-message" id="rateError">This field is required</div>
