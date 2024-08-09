@@ -22,7 +22,7 @@
 						<h2 class="input-title">Mortgage Amount</h2>
 						<div class="amount-bar">
 							<div class="symbol before">$</div>
-							<input aria-label="Mortgage Amount in U.S. dollars" id="amountInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,2})?$">
+							<input aria-label="Mortgage Amount in U.S. dollars" id="amountInput" type="text" inputmode="decimal" required pattern="^(\d{1,3}(,\d{3})*|(\d+))(.\d{1,2})?$">
 						</div>
 						<div class="error-message" id="amountError">This field is required</div>
 					</div>
