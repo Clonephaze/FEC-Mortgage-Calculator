@@ -38,7 +38,9 @@ function calculateMortgage() {
     } else if (type === 'interest') {
         const interestText = $('#interestResultsValue')
         const interestRatePercent = interestRate / 100
-       let totalInterest = interestRatePercent * totalAmount
+        let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate);
+        let totalPayment = monthlyPayment * termMonths;
+       let totalInterest = totalPayment - totalAmount;
         repaymentWrapper.css('opacity', '0');
         interestWrapper.css('opacity', '1');
         updateNumber('#interestResultsValue', totalInterest.toFixed(2));
