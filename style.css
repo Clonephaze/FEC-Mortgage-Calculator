@@ -351,11 +351,29 @@ body {
 
         >span {
             margin-inline-start: 0.25rem;
+            fontt
         }
     }
 }
 
 .total-results {
+    >h3 {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        color: var(--Slate-300);
+    }
+    >p {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-block: 0.5rem;
+
+        >span {
+            margin-inline-start: 0.25rem;
+        }
+    }
+}
+
+.interest-results {
     >h3 {
         margin-top: 1rem;
         font-size: 0.8rem;
