@@ -20,23 +20,28 @@ function calculateMortgage() {
     const type = typeRepayment.is(':checked') ? 'repayment' : 'interest';
     const isValid = checkInputs(totalAmount, termLength, interestRate, type);
     const paymentText = $('#monthlyResultsValue');
-    const totalText = $('#totalResultsValue')
-
+    const totalText = $('#totalResultsValue');
+    const repaymentWrapper = $('#repaymentWrapper');
+    const interestWrapper = $('#interestWrapper');
 
     if (!isValid) {
         return;
     } else if (type === 'repayment') {
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate);
         let totalPayment = monthlyPayment * termMonths;
+        repaymentWrapper.css('opacity', '1');
+        interestWrapper.css('opacity', '0');
         updateNumber('#monthlyResultsValue', monthlyPayment.toFixed(2));
         updateNumber('#totalResultsValue', totalPayment.toFixed(2));
         emptyResults.css('opacity', '0');
         completedResults.css('opacity', '1');
     } else if (type === 'interest') {
+        const interestText = $('#interestResultsValue')
         const interestRatePercent = interestRate / 100
        let totalInterest = interestRatePercent * totalAmount
-        updateNumber('#monthlyResultsValue', totalInterest.toFixed(2));
-        updateNumber('#totalResultsValue', 0);
+        repaymentWrapper.css('opacity', '0');
+        interestWrapper.css('opacity', '1');
+        updateNumber('#interestResultsValue', totalInterest.toFixed(2));
     } else {
         console.log('Error');
     }
