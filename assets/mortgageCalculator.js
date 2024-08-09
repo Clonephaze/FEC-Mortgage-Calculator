@@ -55,9 +55,14 @@ function updateNumber(element, number) {
     }, {
         duration: 500,
         step: function(now) {
-            $(this).text(now.toFixed(2));
+            $(this).text(formatNumber(now.toFixed(0)));
         }
     });
+}
+
+function formatNumber(num) {
+    // Convert the number to a string and use a regular expression to add commas
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function calculateMonthlyPayment(totalAmount, termLength, interestRate) {
