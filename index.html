@@ -22,8 +22,7 @@
 						<h2 class="input-title">Mortgage Amount</h2>
 						<div class="amount-bar">
 							<div class="symbol before">$</div>
-							<input id="amountInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,2})?$">
-							<label hidden for="amountInput">input</label>
+							<input aria-label="Mortgage Amount in U.S. dollars" id="amountInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,2})?$">
 						</div>
 						<div class="error-message" id="amountError">This field is required</div>
 					</div>
@@ -31,8 +30,7 @@
 						<div class="term-wrapper">
 							<h2 class="input-title">Mortgage Term</h2>
 							<div class="term-bar">
-								<input id="termInput" type="text" inputmode="numeric" required pattern="[0-9]+">
-								<label hidden for="termInput">term input</label>
+								<input aria-label="Mortgage Term in years" id="termInput" type="text" inputmode="numeric" required pattern="[0-9]+">
 								<div class="symbol after">Years</div>
 							</div>
 							<div class="error-message" id="termError">This field is required</div>
@@ -40,8 +38,7 @@
 						<div class="rate-wrapper">
 							<h2 class="input-title">Interest Rate</h2>
 							<div class="rate-bar">
-								<input id="rateInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,})?$">
-								<label hidden for="rateInput">input</label>
+								<input aria-label="Interest Rate in percentage, e.g. 5.75" id="rateInput" type="text" inputmode="decimal" required pattern="\d+(\.\d{1,})?$">
 								<div class="symbol after">%</div>
 							</div>
 							<div class="error-message" id="rateError">This field is required</div>
