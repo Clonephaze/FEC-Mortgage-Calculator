@@ -326,6 +326,7 @@ body {
 #interestWrapper{
     grid-area: content;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     transition: opacity 200ms ease-in-out;
 }
@@ -380,9 +381,10 @@ body {
         color: var(--Slate-300);
     }
     >p {
-        font-size: 1.5rem;
+        font-size: clamp(1.75rem, 1.5833rem + 0.7407vw, 2.5rem);
         font-weight: 700;
         margin-block: 0.5rem;
+        color: var(--Lime);
 
         >span {
             margin-inline-start: 0.25rem;
