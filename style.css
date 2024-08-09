@@ -139,12 +139,22 @@ body {
         border-radius: 5px;
         display: flex;
         overflow: clip;
+        transition: border 200ms ease;
 
         &:has(input:user-invalid) {
             border: 1px solid var(--Red);
 
             & .symbol {
                 background-color: var(--Red);
+                color: var(--White);
+            }
+        }
+
+        &:has(input:focus-within) {
+            border: 1px solid var(--Lime);
+
+            & .symbol {
+                background-color: var(--Lime);
                 color: var(--White);
             }
         }
@@ -157,6 +167,16 @@ body {
             height: 100%;
             background-color: var(--Slate-300);
             color: var(--Slate-900);
+            transition: background-color 200ms ease, color 200ms ease;
+        }
+    }
+
+    & .ignore-error {
+        border: 1px solid var(--Slate-500) !important;
+
+        & .symbol {
+            background-color: var(--Slate-300) !important;
+            color: var(--Slate-900) !important;
         }
     }
 
@@ -352,7 +372,6 @@ body {
 
         >span {
             margin-inline-start: 0.25rem;
-            fontt
         }
     }
 }

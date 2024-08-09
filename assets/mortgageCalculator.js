@@ -18,11 +18,9 @@ function calculateMortgage() {
     const termMonths = termLength * 12
     const interestRate = Number(mortgageRate.val());
     const type = typeRepayment.is(':checked') ? 'repayment' : 'interest';
-    const isValid = checkInputs(totalAmount, termLength, interestRate, type);
-    const paymentText = $('#monthlyResultsValue');
-    const totalText = $('#totalResultsValue');
     const repaymentWrapper = $('#repaymentWrapper');
     const interestWrapper = $('#interestWrapper');
+    const isValid = checkInputs(totalAmount, termLength, interestRate, type);
 
     if (!isValid) {
         return;
@@ -36,14 +34,14 @@ function calculateMortgage() {
         emptyResults.css('opacity', '0');
         completedResults.css('opacity', '1');
     } else if (type === 'interest') {
-        const interestText = $('#interestResultsValue')
-        const interestRatePercent = interestRate / 100
         let monthlyPayment = calculateMonthlyPayment(totalAmount, termLength, interestRate);
         let totalPayment = monthlyPayment * termMonths;
-       let totalInterest = totalPayment - totalAmount;
+        let totalInterest = totalPayment - totalAmount;
         repaymentWrapper.css('opacity', '0');
         interestWrapper.css('opacity', '1');
         updateNumber('#interestResultsValue', totalInterest.toFixed(2));
+        emptyResults.css('opacity', '0');
+        completedResults.css('opacity', '1');
     } else {
         console.log('Error');
     }
@@ -54,14 +52,15 @@ function updateNumber(element, number) {
         counter: number
     }, {
         duration: 500,
-        step: function(now) {
-            $(this).text(formatNumber(now.toFixed(0)));
+        step: function (now) {
+            $(this).text(formatNumber(now.toFixed(2)));
         }
     });
 }
 
+
 function formatNumber(num) {
-    // Convert the number to a string and use a regular expression to add commas
+    // Converts the number to a string and uses a regular expression to add commas
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -108,33 +107,53 @@ function calcButtonAnimation() {
     }, 225);
 }
 
-$(document).ready(function() {
+function clearFormFields() {
+    mortgageAmount.val('');
+    $('.amount-bar').addClass('ignore-error');
+    mortgageTerm.val('');
+    $('.term-bar').addClass('ignore-error');
+    mortgageRate.val('');
+    $('.rate-bar').addClass('ignore-error');
+    typeRepayment.prop('checked', false);
+    typeInterest.prop('checked', false);
+    amountError.css('height', '0');
+    termError.css('height', '0');
+    rateError.css('height', '0');
+    typeError.css('height', '0');
+    completedResults.css('opacity', '0');
+    emptyResults.css('opacity', '1');
+}
+
+$(document).ready(function () {
     // Event listeners for input fields to reset error heights when corrected
-    mortgageAmount.on('input', function() {
+    mortgageAmount.on('input', function () {
         if (Number($(this).val()) > 0 && $(this).val().trim() !== "") {
             amountError.css('height', '0'); // Reset height to 0 if the field is correctly filled
         }
+        $('.amount-bar').removeClass('ignore-error');
     });
-    
-    mortgageTerm.on('input', function() {
+
+    mortgageTerm.on('input', function () {
         if (Number($(this).val()) > 0 && $(this).val().trim() !== "") {
             termError.css('height', '0'); // Reset height to 0 if the field is correctly filled
         }
+        $('.term-bar').removeClass('ignore-error');
     });
-    
-    mortgageRate.on('input', function() {
+
+    mortgageRate.on('input', function () {
         if (Number($(this).val()) > 0 && $(this).val().trim() !== "") {
             rateError.css('height', '0'); // Reset height to 0 if the field is correctly filled
         }
+        $('.rate-bar').removeClass('ignore-error');
     });
 
-    typeRepayment.on('change', function() {
+    typeRepayment.on('change', function () {
         if ($(this).is(':checked')) {
             typeError.css('height', '0'); // Reset height to 0 if repayment type is selected
         }
     });
-    
-    typeInterest.on('change', function() {
+
+    typeInterest.on('change', function () {
         if ($(this).is(':checked')) {
             typeError.css('height', '0'); // Reset height to 0 if interest-only type is selected
         }
@@ -144,5 +163,10 @@ $(document).ready(function() {
     calcButton.on('click', function () {
         calcButtonAnimation();
         calculateMortgage();
+    });
+
+    // event listener for clear button
+    clearButton.on('click', function () {
+        clearFormFields();
     });
 })
